@@ -180,7 +180,17 @@ echo -e 'Build number: '$BITRISE_BUILD_NUMBER'\n'
 echo -e 'Updating pubspec.yaml...\n'
 
 # Commit changes if enabled
-# shellcheck disable=SC2154
+echo -e 'Updating pubspec.yaml...\n'
+
+# Assign default value to commit_version_changes if not provided
+if [[ -z "$commit_version_changes" ]]; then
+    commit_version_changes="true"
+fi
+
+# Create a branch for the changes
+git checkout -b "Release/$VERSION_NO"
+
+# Commit changes if enabled
 if [[ "$commit_version_changes" == "true" ]]; then
     # Set default commit message if not provided
     if [[ -z "$commit_message" ]]; then
@@ -193,11 +203,13 @@ if [[ "$commit_version_changes" == "true" ]]; then
     fi
 
     if [[ -z "$commit_author_email" ]]; then
-        commit_author_email="<bitrise@version-control.bitrise>"
+        commit_author_email="<PROD_AppDeveloper@healy.world>"
     fi
 
     git commit -am "$commit_message" --author="$commit_author_name $commit_author_email"
-    git push -u origin "$BITRISE_GIT_BRANCH"
+
+    echo -e '\nPushing the branch and creating a version tag...\n'
+    git push -u origin "Release/$VERSION_NO"
 
     echo -e '\nPushing a version tag...\n'
     git tag "$VERSION_NO"
