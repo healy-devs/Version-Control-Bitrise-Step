@@ -2,29 +2,46 @@
 
 ## Description
 
-This step automates the process of updating the version number in the pubspec.yaml file of a Flutter project based on the specified version type or custom version number. It then pushes the changes to the Git repository.
+This step updates the version number in the pubspec.yaml file based on the specified version type or custom version number, and then pushes the changes to the Git repository.
 
 ## Requirements
 
 - Flutter project
 - Git repository
 
+
 ## Inputs
 
-- `version_type`: Select the type of version update (major, minor, or patch). Optional.
-- `custom_version`: Specify a custom version number in the format x.x.x (e.g., 1.2.3). Optional.
+- **Version Type**: Select the type of version update:
+    - Major: Increment the major version number by 1 (e.g., x.0.0).
+    - Minor: Increment the minor version number by 1 (e.g., 0.x.0).
+    - Patch: Increment the patch version number by 1 (e.g., 0.0.x).
 
-## Outputs
+- **Custom Version Number**: A custom version number to use instead of the version type. If you specify a custom version number, the version type will be ignored.
 
-- `new_version_number`: The updated version number after the changes are made.
+- **Commit Changes**: Choose whether to commit the changes to the Git repository.
+    - If enabled, the step will commit the changes to the Git repository. Default is true.
 
-## Usage
+- **Commit Message**: Specify the commit message to use for the changes. If not provided, a default message will be used.
 
-Add this step to your Bitrise workflow and configure the inputs as needed.
+- **Commit Author Name**: Specify the name of the author for the commit. If not provided, the default author will be used.
+
+- **Commit Author Email**: Specify the email of the author for the commit. If not provided, the default author will be used.
+
+- **Branch Name**: Name of the branch to create for the changes. If not provided, a default branch name will be used.
+
+## Example Usage
 
 ```yaml
 steps:
-  - git::https://github.com/healy-devs/Version-Control-Bitrise-Step@main:
-        inputs:
-         - BITRISE_VERSION_TYPE: patch
-         - commit_version_changes: "false"
+  - update-version-and-push-changes:
+      title: Update Version and Push Changes
+      inputs:
+        - BITRISE_VERSION_TYPE: patch
+        - custom_version_number: ""
+        - commit_version_changes: "true"
+        - commit_message: "Bump version"
+        - commit_author_name: "John Doe"
+        - commit_author_email: "john.doe@example.com"
+        - branch_name: "Release/1.0.0"
+
