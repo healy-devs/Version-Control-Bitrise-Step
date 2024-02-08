@@ -23,5 +23,8 @@ This step automates the process of updating the version number in the pubspec.ya
 Add this step to your Bitrise workflow and configure the inputs as needed.
 
 ```yaml
-- update-version-and-push-changes:
-# version_control_bitrise_step
+steps:
+  - git::https://github.com/healy-devs/Version-Control-Bitrise-Step@main:
+        inputs:
+         - BITRISE_VERSION_TYPE: patch
+         - commit_version_changes: "false"

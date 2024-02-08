@@ -4,7 +4,12 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 workflows:
   test:
     steps:
-      - path::./:
+#      - path::./:
+#            inputs:
+#            - BITRISE_VERSION_TYPE: patch
+#            - commit_version_changes: "false"
+
+      - git::https://github.com/healy-devs/Version-Control-Bitrise-Step@main:
             inputs:
-            - BITRISE_VERSION_TYPE: patch
-            - commit_version_changes: "false"
+             - BITRISE_VERSION_TYPE: patch
+             - commit_version_changes: "false"
