@@ -9,7 +9,7 @@ workflows:
 #            - BITRISE_VERSION_TYPE: patch
 #            - commit_version_changes: "false"
 
-      - git::https://github.com/healy-devs/Version-Control-Bitrise-Step@main:
+      - git::https://github.com/WahdanZ/Version-Control-Bitrise-Step@feature/create_step:
             inputs:
              - BITRISE_VERSION_TYPE: patch
              - commit_version_changes: "false"

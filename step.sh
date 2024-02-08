@@ -179,19 +179,21 @@ echo -e 'Build number: '$BITRISE_BUILD_NUMBER'\n'
 
 echo -e 'Updating pubspec.yaml...\n'
 
-# Commit changes if enabled
-echo -e 'Updating pubspec.yaml...\n'
 
 # Assign default value to commit_version_changes if not provided
 if [[ -z "$commit_version_changes" ]]; then
     commit_version_changes="true"
 fi
 
-# Create a branch for the changes
-git checkout -b "Release/$VERSION_NO"
+
 
 # Commit changes if enabled
 if [[ "$commit_version_changes" == "true" ]]; then
+    if [[ -n "$branch_name" ]]; then
+        git checkout -b "$branch_name"
+    else
+        git checkout -b "Release/$VERSION_NO"
+    fi
     # Set default commit message if not provided
     if [[ -z "$commit_message" ]]; then
         commit_message="Bumped $VERSION_TYPE version"

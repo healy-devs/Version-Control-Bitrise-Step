@@ -17,9 +17,9 @@ inputs:
       summary: Select the type of version update
       description: |-
         Select the type of version update:
-        - Major: Increment the major version number.
-        - Minor: Increment the minor version number.
-        - Patch: Increment the patch version number.
+        - Major: Increment the major version number by 1 (e.g., x.0.0).
+        - Minor: Increment the minor version number by 1 (e.g., 0.x.0).
+        - Patch: Increment the patch version number by 1 (e.g., 0.0.x).
       is_required: true
       is_expand: false
       value_options:
@@ -47,6 +47,14 @@ inputs:
           - "true"
           - "false"
 
+  - branch_name:
+    opts:
+      title: Branch Name
+      summary: Name of the branch to create for the changes
+      description: |-
+        Enter the name of the branch to create for the changes. If not provided,
+        a default branch name will be used "Release/$VERSION_NO".
+      is_required: false
   - commit_message:
     opts:
         title: Commit Message
