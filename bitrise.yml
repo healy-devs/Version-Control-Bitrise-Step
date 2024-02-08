@@ -1,0 +1,15 @@
+format_version: 11
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+workflows:
+  test:
+    steps:
+#      - path::./:
+#            inputs:
+#            - BITRISE_VERSION_TYPE: patch
+#            - commit_version_changes: "false"
+
+      - git::https://github.com/WahdanZ/Version-Control-Bitrise-Step@feature/create_step:
+            inputs:
+             - BITRISE_VERSION_TYPE: patch
+             - commit_version_changes: "false"

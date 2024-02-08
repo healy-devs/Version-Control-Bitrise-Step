@@ -1,0 +1,77 @@
+title: Update Version and Push Changes
+summary: A custom step that updates the version number and pushes changes to the Git repository.
+description: |-
+  This step updates the version number in the pubspec.yaml file based on the specified version type or custom version number, and then pushes the changes to the Git repository.
+website: https://github.com/your-github-account/your-step-repo
+source_code_url: https://github.com/your-github-account/your-step-repo
+support_url: https://github.com/your-github-account/your-step-repo/issues
+project_type_tags:
+  - flutter
+type_tags:
+  - utility
+
+inputs:
+  - BITRISE_VERSION_TYPE: patch
+    opts:
+      title: "Version Type"
+      summary: Select the type of version update
+      description: |-
+        Select the type of version update:
+        - Major: Increment the major version number by 1 (e.g., x.0.0).
+        - Minor: Increment the minor version number by 1 (e.g., 0.x.0).
+        - Patch: Increment the patch version number by 1 (e.g., 0.0.x).
+      is_required: true
+      is_expand: false
+      value_options:
+          - major
+          - minor
+          - patch
+
+  - custom_version_number:
+    opts:
+      title: "Custom Version Number"
+      summary: 'A custom version number to use instead of the version type.'
+      description: |-
+        A custom version number to use instead of the version type. If you specify a custom version number, the version type will be ignored.
+      is_required: false
+      is_expand: false
+
+  - commit_version_changes: "true"
+    opts:
+        title: Commit Changes
+        summary: Choose whether to commit the changes or not (for debugging)
+        description: |-
+          If enabled, the step will commit the changes to the Git repository default is ture.
+        is_required: false
+        value_options:
+          - "true"
+          - "false"
+
+  - branch_name:
+    opts:
+      title: Branch Name
+      summary: Name of the branch to create for the changes
+      description: |-
+        Enter the name of the branch to create for the changes. If not provided,
+        a default branch name will be used "Release/$VERSION_NO".
+      is_required: false
+  - commit_message:
+    opts:
+        title: Commit Message
+        summary: Specify the commit message
+        description: Enter the message to be used for the commit. If not provided, a default message will be used.
+        is_required: false
+
+  - commit_author_name:
+    opts:
+        title: Commit Author Name
+        summary: Specify the author of the commit
+        description: Enter the author of the commit. If not provided, the default author will be used.
+        is_required: false
+
+  - commit_author_email:
+    opts:
+        title: Commit Author Email
+        summary: Specify the author of the commit
+        description: Enter the author of the commit. If not provided, the default author will be used.
+        is_required: false
